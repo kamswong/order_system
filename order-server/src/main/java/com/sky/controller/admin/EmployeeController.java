@@ -98,11 +98,29 @@ public class EmployeeController {
         return Result.success(pageResult);
     }
 
+    /**
+     * 启用禁用账号
+     * @param status
+     * @param id
+     * @return
+     */
     @PostMapping("/status/{status}")
     @ApiOperation("启用禁用账号")
     public Result startOrStop(@PathVariable Integer status, long id){
         log.info("启用禁用账号，{},{}",status,id);
         employeeService.starOrStop(status,id);
         return Result.success();
+    }
+
+    /**
+     * 根据ID查询账号信息
+     * @param id
+     * @return
+     */
+    @GetMapping("/{id}")
+    @ApiOperation("根据ID查询账号信息")
+    public Result<Employee> getById(@PathVariable long id){
+        Employee employee = employeeService.geById(id);
+        return Result.success(employee);
     }
 }

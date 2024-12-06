@@ -33,4 +33,12 @@ public interface EmployeeService {
      * @param id
      */
     void starOrStop(Integer status, long id);
+
+    /**
+     * 根据ID查询账号信息
+     *
+     * @param id
+     * @return
+     */
+    Employee geById(long id);
 }
