@@ -19,9 +19,11 @@ import com.sky.service.EmployeeService;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
 
+import java.beans.beancontext.BeanContext;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -79,8 +81,8 @@ public class EmployeeServiceImpl implements EmployeeService {
         //设置账号启用状态，1为启用，0为停用
         employee.setStatus(StatusConstant.ENABLE);
         //设置账号创建时间和修改时间
-        employee.setCreateTime(LocalDateTime.now());
-        employee.setUpdateTime(LocalDateTime.now());
+        //employee.setCreateTime(LocalDateTime.now());
+        //employee.setUpdateTime(LocalDateTime.now());
         //设置账号创建用户和修改用户
         employee.setCreateUser(BaseContext.getCurrentId());
         employee.setUpdateUser(BaseContext.getCurrentId());
@@ -126,4 +128,17 @@ public class EmployeeServiceImpl implements EmployeeService {
         return employee;
     }
 
+    /**
+     * 编辑员工信息
+     * @param employeeDTO
+     */
+    public void update(EmployeeDTO employeeDTO){
+        Employee employee = new Employee();
+        BeanUtils.copyProperties(employeeDTO,employee);
+
+        //employee.setUpdateTime(LocalDateTime.now());
+        //employee.setUpdateUser(BaseContext.getCurrentId());
+
+        employeeMapper.update(employee);
+    }
 }
